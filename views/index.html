@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1. 0">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@300&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="../css/output.css">
   <title>Burguer´s House</title>
@@ -12,7 +15,7 @@
   <header class="w-full h-[420px] bg-zinc-900 bg-home bg-cover bg-center">
     <div class="w-full h-full flex flex-col justify-center items-center">
       <img class="w-32 h-32 rounded-full shadow-lg hover:scale-110 duration-200" 
-      src="../assets/images/hamb-1.png" alt="Logo Hamburgueria">
+      src="../assets/images/logo.jpg" alt="Logo Hamburgueria">
 
       <h1 class="text-4xl mt-4 mb-2 font-bold text-white">Burguer´s House</h1>
 
@@ -246,16 +249,51 @@
   </div>
   <!-- Fim Menu -->
 
+
+
+  <!-- Modal Cart -->
+    <div class="bg-black/60 w-full h-full fixed top-0 left-0 z-[99] hidden items-center justify-center"
+         id="cart-modal" 
+    >
+      <div class=" bg-white p-5 rounded-md min-w-[90%] md:min-w-[500px]">
+        <h2 class="text-center font-bold text-2xl mb-2">Meu carrinho</h2>
+
+        <div id="cart-items" class="flex justify-between mb-2 flex-col"></div>
+
+        <p class="font-bold">Total:<span id="cart-total"> 0.00</span></p>
+
+        <p class="font-bold mt-4">Endereço de entrega:</p>
+
+        <input type="text"
+          id="address"
+          placeholder="Digite seu endereço completo..."
+          class="w-full rounded border-2 my-2"
+        >
+
+        <p class="text-red-500 hidden" id="address-warn">Digite seu endereço completo!</p>
+
+        <div class="flex justify-between items-center mt-5 w-full">
+          <button id="close-modal-btn" class="hover:bg-gray-200 rounded py-1 px-2">Fechar</button>
+          <button id="checkout-btn" class="bg-green-500 rounded text-white px-3 py-1">Finalizar pedido</button>
+        </div>
+      </div>
+    </div>
+  <!-- Fim Modal Cart -->
+
+
+
   <!-- Button Cart Footer -->
   <footer class="w-full bg-red-700 py-3 fixed bottom-0 z-40 flex items-center justify-center">
     <button class="flex items-center gap-2 text-white font-bold"
       id="cart-btn"
     >
-      (<span id="cart-count">2</span>)
+      (<span id="cart-count">0</span>)
       Veja meu carrinho
       <i class="fa fa-cart-plus text-lg text-white"></i>
     </button>
   </footer>
   <!-- Fim Button Cart Footer -->
+
+  <script src="../js/index.js"></script>
 </body>
 </html>
