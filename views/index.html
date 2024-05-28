@@ -254,7 +254,7 @@
   <!-- Modal Cart -->
     <div class="bg-black/60 w-full h-full fixed top-0 left-0 z-[99] hidden items-center justify-center"
          id="cart-modal" 
-    >
+      >
       <div class=" bg-white p-5 rounded-md min-w-[90%] md:min-w-[500px]">
         <h2 class="text-center font-bold text-2xl mb-2">Meu carrinho</h2>
 
@@ -293,6 +293,23 @@
     </button>
   </footer>
   <!-- Fim Button Cart Footer -->
+
+  <div class="bg-black/60 w-full h-full fixed top-0 left-0 z-[99] hidden items-center justify-center"
+       id="cart-modal-finished" 
+    >
+    <div class="bg-white p-5 rounded-md min-w-[90%] md:min-w-[500px] flex justify-between flex-col">
+      <h1 class="mb-3 font-bold">Pedido confirmado!</h1>
+      <p>Volte sempre!</p>
+
+      <div class="flex justify-between mt-3">
+        <button id="btn-close-finished" class="rounded-md px-2 py-2 hover:bg-gray-200">
+          Fechar
+        </button>
+      </div>
+    </div>
+
+
+  </div>
 
   <script src="../js/index.js"></script>
 </body>

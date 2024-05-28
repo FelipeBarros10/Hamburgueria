@@ -8,6 +8,8 @@ const closeModalBtn = document.getElementById("close-modal-btn")
 const cartCounter = document.getElementById("cart-count")
 const addressInput = document.getElementById("address")
 const addressWarn = document.getElementById("address-warn")
+const cartFinished = document.getElementById("cart-modal-finished")
+const btnFinished = document.getElementById("btn-close-finished") 
 
 let cart = []
 
@@ -112,8 +114,11 @@ function updateCartModal(){
 }
 
 
+//Continuar debugando daqui//
+
 //Listener para identificar a classe e atributo do modal e para chamarva função de "remove"
 cartItemsContainer.addEventListener("click", function (event){
+
   if(event.target.classList.contains("remove-from-cart-btn")){
     const name = event.target.getAttribute("data-name")
 
@@ -140,5 +145,35 @@ function removeItemCart (name){
     
   }
 
-
 }
+
+//Validando o campo de endereço
+
+addressInput.addEventListener("input", function(event){
+  let input = event.target.value
+
+  
+})
+
+
+checkoutBtn.addEventListener("click", function(){
+  if(cart.length === 0){
+    return;
+  }
+  
+  if(addressInput.value === ""){
+    addressWarn.classList.remove("hidden")
+  } else{
+    cartModal.style.display = "none"
+    openModalFinished()
+  }
+})
+
+function openModalFinished(){
+  cartFinished.style.display = "flex"
+    
+}
+
+btnFinished.addEventListener("click", function(){
+  cartFinished.style.display = "none"
+})
