@@ -152,11 +152,23 @@ function removeItemCart (name){
 addressInput.addEventListener("input", function(event){
   let input = event.target.value
 
+  if(input !== ""){
+    addressInput.classList.remove("border-red-500")
+    addressWarn.classList.add("hidden")
+  }
   
 })
 
-
+// Validando o botão de finalização de pedido
 checkoutBtn.addEventListener("click", function(){
+
+  const isOpen = checkIfRestaurantIsOpen()
+
+   if (!isOpen){
+     alert("Restaurante fechado no momento!")
+     return;
+  }
+
   if(cart.length === 0){
     return;
   }
@@ -165,15 +177,57 @@ checkoutBtn.addEventListener("click", function(){
     addressWarn.classList.remove("hidden")
   } else{
     cartModal.style.display = "none"
-    openModalFinished()
   }
+
+  // Enviar pedido para API do WhatsApp
+
+
+  const cartItems = cart.map((item) => { // .MAP retorna um novo array,não substitui, apenas cria um novo, aplicando uma função para cada elemento
+    return (` ${item.name} Quantidade: ${item.quantity} Preço: R$${item.price} |`) // Aqui está retornando a mensagem que será exibida, então estou pegando o nome, quantidade e preço do meu array de produtos
+  }).join("")
+
+  const message = encodeURIComponent(cartItems) //Encodificando a varíavel que vai receber a mensagem
+  const phone = "14996101440"
+
+  window.open(`https://wa.me/${phone}?text=${message} Endereço:${addressInput.value}`, "_blank") //URL da API do WhatsApp inserindo as variáveis que eu criei
+
+  cart = [] // Limpando o Array
+
+  openModalFinished()
+  updateCartModal()
+
 })
 
+// Modal de finalização de pedidos
 function openModalFinished(){
   cartFinished.style.display = "flex"
     
 }
 
+// Fechando o modal de finalização de pedidos
 btnFinished.addEventListener("click", function(){
   cartFinished.style.display = "none"
 })
+
+
+//Função de para checar se o restaurante está aberto
+function checkIfRestaurantIsOpen (){
+  const data = new Date()
+  const hora = data.getHours()
+
+  if(hora >= 18 && hora < 22){
+    return true
+  }
+}
+
+//Aqui, se não estiver no horário de funcionamento estará vermelho, se sim, estará verde (Assim que fora carregado a janela essa verificção será feita)
+const spanItem = document.getElementById("date-span")
+const isOpen = checkIfRestaurantIsOpen()
+
+if (isOpen){
+  spanItem.classList.remove("bg-red-600")
+  spanItem.classList.add("bg-green-600")
+} else{
+  spanItem.classList.remove("bg-green-600")
+  spanItem.classList.add("bg-red-600")
+}
