@@ -187,18 +187,19 @@ checkoutBtn.addEventListener("click", function(){
       addressWarn.classList.remove("hidden")
     } else{
       cartModal.style.display = "none"
+
+      const cartItems = cart.map((item) => { // .MAP retorna um novo array,não substitui, apenas cria um novo, aplicando uma função para cada elemento
+        return (` ${item.name} Quantidade: ${item.quantity} Preço: R$${item.price} |`) // Aqui está retornando a mensagem que será exibida, então estou pegando o nome, quantidade e preço do meu array de produtos
+      }).join("")
+    
+      const message = encodeURIComponent(cartItems) //Encodificando a varíavel que vai receber a mensagem
+      const phone = "14996101440"
+    
+      window.open(`https://wa.me/${phone}?text=${message} Endereço:${addressInput.value}`, "_blank") //URL da API do WhatsApp inserindo as variáveis que eu criei
+    
+      cart = [] // Limpando o Array
     }
     
-    const cartItems = cart.map((item) => { // .MAP retorna um novo array,não substitui, apenas cria um novo, aplicando uma função para cada elemento
-      return (` ${item.name} Quantidade: ${item.quantity} Preço: R$${item.price} |`) // Aqui está retornando a mensagem que será exibida, então estou pegando o nome, quantidade e preço do meu array de produtos
-    }).join("")
-  
-    const message = encodeURIComponent(cartItems) //Encodificando a varíavel que vai receber a mensagem
-    const phone = "14996101440"
-  
-    window.open(`https://wa.me/${phone}?text=${message} Endereço:${addressInput.value}`, "_blank") //URL da API do WhatsApp inserindo as variáveis que eu criei
-  
-    cart = [] // Limpando o Array
 
     openModalFinished()
     updateCartModal()
@@ -210,7 +211,7 @@ checkoutBtn.addEventListener("click", function(){
 function openModalFinished(){
   const isOpen = checkIfRestaurantIsOpen()
 
-  if(isOpen) {
+  if(isOpen && addressInput.value != "") {
     cartFinished.style.display = "flex"
   }
     
