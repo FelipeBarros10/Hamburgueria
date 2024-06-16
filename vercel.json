@@ -3,12 +3,14 @@
     { "src": "views/index.html", "use": "@vercel/static" },
     { "src": "css/index.css", "use": "@vercel/static" },
     { "src": "js/index.js", "use": "@vercel/static" },
-    { "src": "css/output.css", "use": "@vercel/static" }
+    { "src": "css/output.css", "use": "@vercel/static" },
+    { "src": "assets/images/*", "use": "@vercel/static" }
   ],
   "routes": [
     { "src": "/", "dest": "views/index.html" },
     { "src": "/index.css", "dest": "css/index.css" },
     { "src": "/index.js", "dest": "js/index.js" },
-    { "src": "/output.css", "dest": "css/output.css" }
+    { "src": "/output.css", "dest": "css/output.css" },
+    { "src": "/images/(.*)", "dest": "assets/images/$1" }
   ]
 }
