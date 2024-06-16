@@ -165,42 +165,54 @@ checkoutBtn.addEventListener("click", function(){
   const isOpen = checkIfRestaurantIsOpen()
 
    if (!isOpen){
-     alert("Restaurante fechado no momento!")
-     return;
-  }
 
-  if(cart.length === 0){
-    return;
-  }
+    Toastify({
+      text: "Ops, restaurante fechado no momento",
+      duration: 3000,
+      close: true,
+      gravity: "top", // `top` or `bottom`
+      position: "right", // `left`, `center` or `right`
+      stopOnFocus: true, // Prevents dismissing of toast on hover
+      style: {
+        background: "#ef4444",
+      }
+    }).showToast()
+  } else if(isOpen){
+    
+    if(cart.length === 0){
+      return;
+    }
+    
+    if(addressInput.value === ""){
+      addressWarn.classList.remove("hidden")
+    } else{
+      cartModal.style.display = "none"
+    }
+    
+    const cartItems = cart.map((item) => { // .MAP retorna um novo array,não substitui, apenas cria um novo, aplicando uma função para cada elemento
+      return (` ${item.name} Quantidade: ${item.quantity} Preço: R$${item.price} |`) // Aqui está retornando a mensagem que será exibida, então estou pegando o nome, quantidade e preço do meu array de produtos
+    }).join("")
   
-  if(addressInput.value === ""){
-    addressWarn.classList.remove("hidden")
-  } else{
-    cartModal.style.display = "none"
+    const message = encodeURIComponent(cartItems) //Encodificando a varíavel que vai receber a mensagem
+    const phone = "14996101440"
+  
+    window.open(`https://wa.me/${phone}?text=${message} Endereço:${addressInput.value}`, "_blank") //URL da API do WhatsApp inserindo as variáveis que eu criei
+  
+    cart = [] // Limpando o Array
+
+    openModalFinished()
+    updateCartModal()
   }
-
-  // Enviar pedido para API do WhatsApp
-
-
-  const cartItems = cart.map((item) => { // .MAP retorna um novo array,não substitui, apenas cria um novo, aplicando uma função para cada elemento
-    return (` ${item.name} Quantidade: ${item.quantity} Preço: R$${item.price} |`) // Aqui está retornando a mensagem que será exibida, então estou pegando o nome, quantidade e preço do meu array de produtos
-  }).join("")
-
-  const message = encodeURIComponent(cartItems) //Encodificando a varíavel que vai receber a mensagem
-  const phone = "14996101440"
-
-  window.open(`https://wa.me/${phone}?text=${message} Endereço:${addressInput.value}`, "_blank") //URL da API do WhatsApp inserindo as variáveis que eu criei
-
-  cart = [] // Limpando o Array
-
-  openModalFinished()
-  updateCartModal()
 
 })
 
 // Modal de finalização de pedidos
 function openModalFinished(){
-  cartFinished.style.display = "flex"
+  const isOpen = checkIfRestaurantIsOpen()
+
+  if(isOpen) {
+    cartFinished.style.display = "flex"
+  }
     
 }
 
