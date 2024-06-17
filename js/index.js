@@ -60,8 +60,33 @@ function addToCart (name, price) {
   
   if(existingItem){
     //Se o item já existe, aumenta a quantidade + 1
+    Toastify({
+      text: "Item adicionado ao carrinho",
+      duration: 3000,
+      close: true,
+      gravity: "top", // `top` or `bottom`
+      position: "right", // `left`, `center` or `right`
+      stopOnFocus: true, // Prevents dismissing of toast on hover
+      style: {
+        background: "#16a34a",
+      }
+    }).showToast()
+  
     existingItem.quantity += 1
   } else{
+    
+    Toastify({
+      text: "Item adicionado ao carrinho",
+      duration: 3000,
+      close: true,
+      gravity: "top", // `top` or `bottom`
+      position: "right", // `left`, `center` or `right`
+      stopOnFocus: true, // Prevents dismissing of toast on hover
+      style: {
+        background: "#16a34a",
+      }
+    }).showToast()
+
     cart.push({
       name,
       price,
